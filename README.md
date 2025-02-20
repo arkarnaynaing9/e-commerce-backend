@@ -18,6 +18,8 @@ This is a backend API for an e-commerce platform built using Laravel. The API pr
 - **MySQL**: Database to store user, product, and order data.
 - **API Routes**: For communication between client and server.
 
+   AI-assisted coding-ChatGPT
+
 ## Installation
 
 1. Clone the repository:

@@ -1,66 +1,114 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# E-Commerce API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a backend API for an e-commerce platform built using Laravel. The API provides user registration, login, and CRUD operations for products, orders, and users. It has role-based authentication where admin users can manage products, orders, and users, while regular users can view and purchase products.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- User Authentication (Register, Login, Logout)
+- Role-Based Access Control (Admin vs User)
+- Admin CRUD Operations for Products, Orders, and Users
+- User CRUD Operations for Products and Orders
+- Sanctum-based Authentication for API security
+- RESTful API routes for product and order management
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Technologies Used
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Laravel**: PHP framework for building the backend.
+- **Sanctum**: For API token authentication.
+- **MySQL**: Database to store user, product, and order data.
+- **API Routes**: For communication between client and server.
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clone the repository:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    ```bash
+    git clone https://github.com/yourusername/ecommerce-api.git
+    cd ecommerce-api
+    ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. Install dependencies:
 
-## Laravel Sponsors
+    ```bash
+    composer install
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+3. Set up your `.env` file (you can copy `.env.example`):
 
-### Premium Partners
+    ```bash
+    cp .env.example .env
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+4. Generate the application key:
 
-## Contributing
+    ```bash
+    php artisan key:generate
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. Configure your database connection in the `.env` file.
 
-## Code of Conduct
+6. Run the database migrations to set up the tables:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    ```bash
+    php artisan migrate
+    ```
 
-## Security Vulnerabilities
+7. Optionally, seed your database with sample data:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    ```bash
+    php artisan db:seed
+    ```
 
-## License
+8. Serve the application:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    ```bash
+    php artisan serve
+    ```
+
+Now, the API should be accessible at `http://localhost:8000`.
+
+## API Endpoints
+
+### Authentication
+
+- **POST** `/api/register`: Register a new user (returns user data and API token).
+- **POST** `/api/login`: Login an existing user (returns user data and API token).
+- **POST** `/api/logout`: Logout the authenticated user.
+
+### Admin Routes (Requires Admin Role)
+
+- **GET** `/api/admin/products`: List all products.
+- **POST** `/api/admin/products`: Create a new product.
+- **GET** `/api/admin/products/{product}`: View a product.
+- **PUT** `/api/admin/products/{product}`: Update a product.
+- **DELETE** `/api/admin/products/{product}`: Delete a product.
+
+- **GET** `/api/admin/orders`: List all orders.
+- **GET** `/api/admin/orders/{order}`: View an order.
+- **POST** `/api/admin/orders`: Create a new order.
+- **PUT** `/api/admin/orders/{order}`: Update an order.
+- **DELETE** `/api/admin/orders/{order}`: Delete an order.
+
+- **GET** `/api/admin/users`: List all users.
+- **POST** `/api/admin/users`: Create a new user.
+- **GET** `/api/admin/users/{user}`: View a user.
+- **PUT** `/api/admin/users/{user}`: Update a user.
+- **DELETE** `/api/admin/users/{user}`: Delete a user.
+
+### User Routes
+
+- **GET** `/api/user/products`: List all products.
+- **GET** `/api/user/products/{product}`: View a product.
+
+- **POST** `/api/user/orders`: Create a new order.
+- **GET** `/api/user/orders`: List all orders for the authenticated user.
+- **GET** `/api/user/orders/{order}`: View a specific order.
+
+## Authentication & Authorization
+
+This API uses Laravel Sanctum for token-based authentication. Users must provide a valid API token in the `Authorization` header for protected routes.
+
+Example:
+
+```bash
+Authorization: Bearer {your_api_token}
